@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- thymeleaf：テンプレートエンジン -->
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="${title}">Insert title here</title>
 </head>
 <body>
-<h1>title</h1>
+<h1 th:text="${title}">title</h1>
 
 <!-- These are links to use for next lessons -->
 <!-- こちらは後で使用されるリンクです -->

@@ -19,7 +19,8 @@ public class SampleController {
 // 		this.jdbcTemplate = jdbcTemplate;
 // 	}
 
-	@GetMapping // GET:データをURLに含める
+	// GET:データをURLに含める
+	@GetMapping("/test")
 	public String test(Model model) {
 
 		model.addAttribute("title", "Inquiry Form");
