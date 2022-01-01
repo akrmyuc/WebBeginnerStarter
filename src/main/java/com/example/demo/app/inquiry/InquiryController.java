@@ -29,7 +29,7 @@ public class InquiryController {
 	}
 
 	@GetMapping("/form")
-	public String form(Model model) {
+	public String form(InquiryForm inquiryForm, Model model) {
 		// addAttribute：htmlに送る
 		model.addAttribute("title", "Inquiry Form");
 
