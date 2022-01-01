@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
  * イージーモードではこちらは完成させてあります。作成を練習したい場合は一度ファイルごと削除してください。
  */
 public class InquiryForm{
-	
+
 	public InquiryForm() {}
 
     public InquiryForm(String name, String email, String contents) {
@@ -19,11 +19,11 @@ public class InquiryForm{
 		this.contents = contents;
 	}
 
-	@Size(min = 1, max = 20, message="Please input 20 characters or less")
+	@Size(min = 1, max = 20, message="20文字以内で入力してください")
     private String name;
-    
+
     @NotNull
-    @Email(message = "Invalid E-mail Format")
+    @Email(message = "無効な電子メール形式です")
     private String email;
 
     @NotNull
