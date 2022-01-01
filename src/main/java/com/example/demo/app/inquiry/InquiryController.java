@@ -2,6 +2,8 @@ package com.example.demo.app.inquiry;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +46,17 @@ public class InquiryController {
 
 
 	@PostMapping("/confirm")
-	public String confirm(/*Add parameters. */) {
+	public String confirm(@Validated InquiryForm inquiryForm,
+			BindingResult result,
+			Model model) {
 
-		//hands-on
+		if(result.hasErrors()) {
+			// エラーがあればtrue。formのページに戻す
+			model.addAttribute("title", "InquiryForm");
+			return "inquiry/form";
+		}
+		// エラーがなかった場合
+		model.addAttribute("title", "確認ページ");
 
 		return "inquiry/confirm";
 	}
