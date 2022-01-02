@@ -5,8 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /*
  * Add annotations here
@@ -31,16 +33,17 @@ public class InquiryController {
 	}
 
 	@GetMapping("/form")
-	public String form(InquiryForm inquiryForm, Model model) {
+	public String form(InquiryForm inquiryForm, Model model,
+			@ModelAttribute("complete")String complete) {
 		// addAttribute：htmlに送る
-		model.addAttribute("title", "Inquiry Form");
+		model.addAttribute("title", "お問い合わせフォーム");
 
 		return "inquiry/form";
 	}
 
 	@PostMapping("/form")
 	public String formGoBack(InquiryForm inquiryForm, Model model) {
-		model.addAttribute("title", "Inquiry Form");
+		model.addAttribute("title", "お問い合わせフォーム");
 		return "inquiry/form";
 	}
 
@@ -52,7 +55,7 @@ public class InquiryController {
 
 		if(result.hasErrors()) {
 			// エラーがあればtrue。formのページに戻す
-			model.addAttribute("title", "InquiryForm");
+			model.addAttribute("title", "お問い合わせフォーム");
 			return "inquiry/form";
 		}
 		// エラーがなかった場合
@@ -62,13 +65,19 @@ public class InquiryController {
 	}
 
 	@PostMapping("/complete")
-	public String complete(/*Add parameters. */) {
+	public String complete(@Validated InquiryForm inquiry,
+			BindingResult result,
+			Model model,
+			RedirectAttributes redirectAttributes) {
 
-		//hands-on
+		if(result.hasErrors()) {
+			model.addAttribute("title", "お問い合わせフォーム");
+			return "Inquiry/form"; // htmlファイル名
+		}
 
-		//redirect
+		redirectAttributes.addFlashAttribute("complete", "Registered!");
 
-		return "";
+		return "redirect:/inquiry/form"; // URL
 	}
 
 }
