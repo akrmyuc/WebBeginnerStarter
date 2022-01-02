@@ -75,7 +75,7 @@ public class InquiryController {
 			return "Inquiry/form"; // htmlファイル名
 		}
 
-		redirectAttributes.addFlashAttribute("complete", "Registered!");
+		redirectAttributes.addFlashAttribute("complete", "送信が完了しました");
 
 		return "redirect:/inquiry/form"; // URL
 	}

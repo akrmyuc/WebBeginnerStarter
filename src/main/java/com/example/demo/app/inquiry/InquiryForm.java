@@ -22,11 +22,11 @@ public class InquiryForm{
 	@Size(min = 1, max = 20, message="20文字以内で入力してください")
     private String name;
 
-    @NotNull
+    @NotNull(message = "メールアドレスを入力してください")
     @Email(message = "無効な電子メール形式です")
     private String email;
 
-    @NotNull
+    @NotNull(message = "お問い合わせ内容を入力してください")
     private String contents;
 
 	public String getName() {
