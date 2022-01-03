@@ -1,6 +1,7 @@
 package com.example.demo.app.inquiry;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Inquiry;
 import com.example.demo.service.InquiryService;
 
-/*
- * Add annotations here
- */
 @Controller
 @RequestMapping("/inquiry")
 public class InquiryController {
@@ -32,7 +30,10 @@ public class InquiryController {
 	@GetMapping
 	public String index(Model model) {
 
-		//hands-on
+		List<Inquiry> list = inquiryService.getAll();
+
+		model.addAttribute("inquiryList", list);
+		model.addAttribute("title", "Inquiry Index");
 
 		return "inquiry/index";
 	}
@@ -42,7 +43,6 @@ public class InquiryController {
 			@ModelAttribute("complete")String complete) {
 		// addAttribute：htmlに送る
 		model.addAttribute("title", "お問い合わせフォーム");
-
 		return "inquiry/form";
 	}
 
@@ -65,25 +65,24 @@ public class InquiryController {
 		}
 		// エラーがなかった場合
 		model.addAttribute("title", "確認ページ");
-
 		return "inquiry/confirm";
 	}
 
 	@PostMapping("/complete")
-	public String complete(@Validated InquiryForm inquiry,
+	public String complete(@Validated InquiryForm inquiryForm,
 			BindingResult result,
 			Model model,
 			RedirectAttributes redirectAttributes) {
 
 		if(result.hasErrors()) {
 			model.addAttribute("title", "お問い合わせフォーム");
-			return "Inquiry/form"; // htmlファイル名
+			return "inquiry/form"; // htmlファイル名
 		}
 
 		Inquiry inquiry = new Inquiry();
-		Inquiry.setName(InquiryForm.getName());
-		inquiry.setEmail(InquiryForm.getEmail());
-		inquiry.setContents(InquiryForm.getContents());
+		inquiry.setName(inquiryForm.getName());
+		inquiry.setEmail(inquiryForm.getEmail());
+		inquiry.setContents(inquiryForm.getContents());
 		inquiry.setCreated(LocalDateTime.now());
 
 		inquiryService.save(inquiry);

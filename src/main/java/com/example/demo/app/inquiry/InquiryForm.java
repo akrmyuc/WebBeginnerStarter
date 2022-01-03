@@ -4,10 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
- * This is completed in Easy mode. If you want to practice, please delete this file.
- * イージーモードではこちらは完成させてあります。作成を練習したい場合は一度ファイルごと削除してください。
- */
+
 public class InquiryForm{
 
 	public InquiryForm() {}
@@ -29,6 +26,7 @@ public class InquiryForm{
     @NotNull(message = "お問い合わせ内容を入力してください")
     private String contents;
 
+
 	public String getName() {
 		return name;
 	}
@@ -37,6 +35,7 @@ public class InquiryForm{
 		this.name = name;
 	}
 
+
 	public String getEmail() {
 		return email;
 	}
@@ -44,6 +43,7 @@ public class InquiryForm{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getContents() {
 		return contents;
