@@ -1,5 +1,7 @@
 package com.example.demo.app.inquiry;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.Inquiry;
+import com.example.demo.service.InquiryService;
+
 /*
  * Add annotations here
  */
@@ -17,12 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/inquiry")
 public class InquiryController {
 
-// 	private final InquiryService inquiryService;
+ 	private final InquiryService inquiryService;
 
 	//Add an annotation here
-// 	public InquiryController(InquiryService inquiryService){
-// 		this.inquiryService = inquiryService;
-// 	}
+ 	public InquiryController(InquiryService inquiryService){
+ 		this.inquiryService = inquiryService;
+ 	}
 
 	@GetMapping
 	public String index(Model model) {
@@ -74,6 +79,14 @@ public class InquiryController {
 			model.addAttribute("title", "お問い合わせフォーム");
 			return "Inquiry/form"; // htmlファイル名
 		}
+
+		Inquiry inquiry = new Inquiry();
+		Inquiry.setName(InquiryForm.getName());
+		inquiry.setEmail(InquiryForm.getEmail());
+		inquiry.setContents(InquiryForm.getContents());
+		inquiry.setCreated(LocalDateTime.now());
+
+		inquiryService.save(inquiry);
 
 		redirectAttributes.addFlashAttribute("complete", "送信が完了しました");
 
