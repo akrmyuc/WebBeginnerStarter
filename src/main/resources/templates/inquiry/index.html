@@ -11,7 +11,7 @@
 	<tr>
 		<th>id</th><th>name</th><th>email</th><th>contents</th><th>datetime</th>
 	</tr>
-	<tr th:each="inquiry : ${inquiryList}">
+	<tr th:each="inquiry : ${inquiryList}"> <!-- th:eachは、拡張for文 -->
 		<td th:text="${inquiry.id}">1</td>
 		<td th:text="${inquiry.name}"></td>
 		<td th:text="${inquiry.email}"></td>
