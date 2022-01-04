@@ -33,14 +33,14 @@ public class InquiryController {
 		List<Inquiry> list = inquiryService.getAll();
 
 		model.addAttribute("inquiryList", list);
-		model.addAttribute("title", "Inquiry Index");
+		model.addAttribute("title", "お問い合わせ一覧");
 
 		return "inquiry/index";
 	}
 
 	@GetMapping("/form")
 	public String form(InquiryForm inquiryForm, Model model,
-			@ModelAttribute("complete")String complete) {
+			@ModelAttribute("complete") String complete) {
 		// addAttribute：htmlに送る
 		model.addAttribute("title", "お問い合わせフォーム");
 		return "inquiry/form";
