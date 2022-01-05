@@ -23,15 +23,14 @@ public class InquiryServiceImpl implements InquiryService {
 		dao.insertInquiry(inquiry);
 	}
 
-//  This method is used in the latter chapter
-//	@Override
-//	public void update(Inquiry inquiry) {
-//
-//		//return dao.updateInquiry(inquiry);
-//		if(dao.updateInquiry(inquiry) == 0) {
-//			throw new InquiryNotFoundException("can't find the same ID");
-//		}
-//	}
+	@Override
+	public void update(Inquiry inquiry) {
+
+		//return dao.updateInquiry(inquiry);
+		if(dao.updateInquiry(inquiry) == 0) {
+			throw new InquiryNotFoundException("同じIDが見つかりません");
+		}
+	}
 
 	@Override
 	public List<Inquiry> getAll() {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 
+//@ControllerAdvice: 全てのControllerに対して共通処理を組むことができる
 @ControllerAdvice
 public class WebMvcControllerAdvice {
 
@@ -18,17 +19,17 @@ public class WebMvcControllerAdvice {
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
-    
+
 	@ExceptionHandler(EmptyResultDataAccessException.class)
 	public String handleException(EmptyResultDataAccessException e,Model model) {
 		model.addAttribute("message", e);
 		return "error/CustomPage";
 	}
-	
+
 //	@ExceptionHandler(InquiryNotFoundException.class)
 //	public String handleException(InquiryNotFoundException e,Model model) {
 //		model.addAttribute("message", e);
 //		return "error/CustomPage";
 //	}
-   
+
 }

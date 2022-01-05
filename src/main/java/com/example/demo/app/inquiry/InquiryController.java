@@ -35,6 +35,19 @@ public class InquiryController {
 		model.addAttribute("inquiryList", list);
 		model.addAttribute("title", "お問い合わせ一覧");
 
+		Inquiry inquiry = new Inquiry();
+		inquiry.setId(4);
+		inquiry.setName("Jamie");
+		inquiry.setEmail("sample4@example.com");
+		inquiry.setContents("Hello");
+
+//		try {
+//			inquiryService.update(inquiry);
+//		} catch(InquiryNotFoundException e) {
+//			model.addAttribute("message", e);
+//			return "error/CustomPage";
+//		}
+
 		return "inquiry/index";
 	}
 
