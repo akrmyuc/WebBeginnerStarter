@@ -35,13 +35,13 @@ public class InquiryController {
 		model.addAttribute("inquiryList", list);
 		model.addAttribute("title", "お問い合わせ一覧");
 
-		Inquiry inquiry = new Inquiry();
-		inquiry.setId(4);
-		inquiry.setName("Jamie");
-		inquiry.setEmail("sample4@example.com");
-		inquiry.setContents("Hello");
-
-		inquiryService.update(inquiry);
+//		Inquiry inquiry = new Inquiry();
+//		inquiry.setId(4);
+//		inquiry.setName("Jamie");
+//		inquiry.setEmail("sample4@example.com");
+//		inquiry.setContents("Hello");
+//
+//		inquiryService.update(inquiry);
 
 //		try {
 //			inquiryService.update(inquiry);
@@ -50,7 +50,7 @@ public class InquiryController {
 //			return "error/CustomPage";
 //		}
 
-		return "inquiry/index";
+		return "inquiry/index_boot";
 	}
 
 	@GetMapping("/form")
@@ -58,13 +58,13 @@ public class InquiryController {
 			@ModelAttribute("complete") String complete) {
 		// addAttribute：htmlに送る
 		model.addAttribute("title", "お問い合わせフォーム");
-		return "inquiry/form";
+		return "inquiry/form_boot";
 	}
 
 	@PostMapping("/form")
 	public String formGoBack(InquiryForm inquiryForm, Model model) {
 		model.addAttribute("title", "お問い合わせフォーム");
-		return "inquiry/form";
+		return "inquiry/form_boot";
 	}
 
 
@@ -76,11 +76,11 @@ public class InquiryController {
 		if(result.hasErrors()) {
 			// エラーがあればtrue。formのページに戻す
 			model.addAttribute("title", "お問い合わせフォーム");
-			return "inquiry/form";
+			return "inquiry/form_boot";
 		}
 		// エラーがなかった場合
 		model.addAttribute("title", "確認ページ");
-		return "inquiry/confirm";
+		return "inquiry/confirm_boot";
 	}
 
 	@PostMapping("/complete")
@@ -91,7 +91,7 @@ public class InquiryController {
 
 		if(result.hasErrors()) {
 			model.addAttribute("title", "お問い合わせフォーム");
-			return "inquiry/form"; // htmlファイル名
+			return "inquiry/form_boot"; // htmlファイル名
 		}
 
 		Inquiry inquiry = new Inquiry();
@@ -104,7 +104,7 @@ public class InquiryController {
 
 		redirectAttributes.addFlashAttribute("complete", "送信が完了しました");
 
-		return "redirect:/inquiry/form"; // URL
+		return "redirect:/inquiry/form"; // URLなので、_bootにしない！
 	}
 
 ////	例外を補足するメソッド
